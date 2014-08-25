@@ -8,6 +8,6 @@ public class SocialController {
 
     @RequestMapping("/")
     public String home() {
-        return "home";
+        return "index";
     }
 }

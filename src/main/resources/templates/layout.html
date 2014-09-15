@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Spring Social Sample</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Spring Social Sample</title>
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../static/css/vendor/bootstrap-social.css">
-    <link rel="stylesheet" href="../static/css/social-connect.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../static/css/vendor/bootstrap-social.css" th:href="@{/css/vendor/bootstrap-social.css}"/>
+    <link rel="stylesheet" href="../static/css/social-connect.css" th:href="@{/css/social-connect.css}"/>
 </head>
 <body>
     <header role="banner">
@@ -32,7 +32,7 @@
     </header>
 
     <main role="main">
-        <div class="container">
+        <div class="container" layout:fragment="content">
             Main content here
         </div>
     </main>
@@ -45,6 +45,6 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="../static/js/social-connect.js"></script>
+    <script src="../static/js/social-connect.js" th:src="@{/js/social-connect.js}"></script>
 </body>
 </html>

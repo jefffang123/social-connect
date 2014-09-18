@@ -1,0 +1,24 @@
+body > footer {
+    margin-top: 50px;
+}
+
+.form-control {
+    font-size: 16px;
+    padding: 20px 12px;
+    height: 45px;
+}
+
+.social-buttons {
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+    margin-top: 30px;
+    position: relative;
+}
+
+.social-buttons:before {
+    content: 'or';
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    font-weight: bold;
+}

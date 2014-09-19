@@ -34,6 +34,9 @@ public class Application {
                     .and()
                 .formLogin()
                     .loginPage("/signin")
+                    .permitAll()
+                    .and()
+                .logout()
                     .permitAll();
         }
     }

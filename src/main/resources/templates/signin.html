@@ -19,7 +19,16 @@
                 <header>
                     <h2>Sign in</h2>
                 </header>
-                <form method="post" role="form">
+
+                <div class="alert alert-danger" role="alert" th:if="${param.error}">
+                    Wrong username or password
+                </div>
+
+                <div class="alert alert-success" role="alert" th:if="${param.logout}">
+                    Signed out successfully
+                </div>
+
+                <form method="post" role="form" th:action="@{/signin}">
                     <input name="username" type="text" class="form-control" placeholder="Username" required="" autofocus=""/>
                     <input name="password" type="password" class="form-control" placeholder="Password" required=""/>
                     <div class="checkbox">

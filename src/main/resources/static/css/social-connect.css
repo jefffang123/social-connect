@@ -22,3 +22,8 @@ body > footer {
     top: -10px;
     font-weight: bold;
 }
+
+.signup {
+    text-align: right;
+    padding-top: 5px;
+}

@@ -21,11 +21,22 @@ repositories {
 }
 
 dependencies {
+    // WebMvc
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+
+    // Security
     compile("org.springframework.boot:spring-boot-starter-security")
-    runtime("org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE")
+    runtime("org.thymeleaf.extras:thymeleaf-extras-springsecurity3")
+
+    // JPA
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    runtime("org.hsqldb:hsqldb")
+
+    // Monitoring
     runtime("org.springframework.boot:spring-boot-starter-actuator")
+
+    // Test
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 

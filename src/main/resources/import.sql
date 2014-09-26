@@ -1,1 +1,2 @@
-insert into user (username, password, first_name, last_name, email) values ('jeff', 'test1234', 'Jeff', 'Fang', 'sanlyfang@gmail.com')
+insert into user (username, password, first_name, last_name, email, enabled) values ('jeff', 'test1234', 'Jeff', 'Fang', 'sanlyfang@gmail.com', true);
+insert into user (username, password, first_name, last_name, email, enabled) values ('test', 'test1234', 'Test', 'Test', 'test@gmail.com', false);

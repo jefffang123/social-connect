@@ -30,6 +30,9 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    private boolean enabled = true;
+
     public Long getId() {
         return id;
     }
@@ -80,5 +83,13 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

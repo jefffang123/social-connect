@@ -14,7 +14,7 @@
         </caption>
         <tr>
             <td>Username</td>
-            <td>test</td>
+            <td th:text="${user.username}">test</td>
         </tr>
         <tr>
             <td>Password</td>
@@ -22,19 +22,19 @@
         </tr>
         <tr>
             <td>First name</td>
-            <td>Test</td>
+            <td th:text="${user.firstName}">Test</td>
         </tr>
         <tr>
             <td>Middle name</td>
-            <td>Test</td>
+            <td th:text="${user.middleName}">Test</td>
         </tr>
         <tr>
             <td>Last name</td>
-            <td>Test</td>
+            <td th:text="${user.lastName}">Test</td>
         </tr>
         <tr>
             <td>Email</td>
-            <td>test@gmail.com</td>
+            <td th:text="${user.email}">test@gmail.com</td>
         </tr>
         <tr>
             <td>Last Logon Time</td>

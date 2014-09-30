@@ -2,9 +2,9 @@ body > footer {
     margin-top: 50px;
 }
 
-.form-control {
-    font-size: 16px;
-    height: 45px;
+header.signup {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
 }
 
 .social-buttons {
@@ -22,7 +22,7 @@ body > footer {
     font-weight: bold;
 }
 
-.signup {
+p.signup {
     text-align: right;
     padding-top: 5px;
 }

@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
             <section>
-                <header>
+                <header class="signup">
                     <h2>Sign in</h2>
                 </header>
 
@@ -27,17 +27,38 @@
                     Signed out successfully
                 </div>
 
-                <form method="post" role="form" th:action="@{/signin}">
-                    <input name="username" type="text" class="form-control" placeholder="Username" required="" autofocus=""/>
-                    <input name="password" type="password" class="form-control" placeholder="Password" required=""/>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="remember-me"/>
-                            Remember me
-                        </label>
+                <form method="post" class="form-horizontal" role="form" th:action="@{/signin}">
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">Username</label>
+                        <div class="col-sm-10">
+                            <input id="username" name="username" type="text" class="form-control" placeholder="Username" required="" autofocus=""/>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
-                    <p class="signup"><a href="#">Sign up</a> | <a href="#">Forgot your password?</a></p>
+
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input id="password" name="password" type="password" class="form-control" placeholder="Password" required=""/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="remember-me"/>
+                                    Remember me
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+                            <p class="signup"><a href="#">Sign up</a> | <a href="#">Forgot your password?</a></p>
+                        </div>
+                    </div>
                 </form>
             </section>
 

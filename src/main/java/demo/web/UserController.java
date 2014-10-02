@@ -4,8 +4,8 @@ import demo.domain.User;
 import demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 
@@ -16,11 +16,10 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/")
-    public String home(Principal principal, Model model) {
+    public ModelAndView home(Principal principal) {
         String username = principal.getName();
         User user = userService.findByUsername(username);
-        model.addAttribute(user);
 
-        return "home";
+        return new ModelAndView("home", "user", user);
     }
 }

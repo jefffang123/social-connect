@@ -33,6 +33,13 @@ public class User implements Serializable {
     @Column(nullable = false)
     private boolean enabled = true;
 
+    protected User() {
+    }
+
+    public User(String username) {
+        this.username = username;
+    }
+
     public Long getId() {
         return id;
     }
@@ -91,5 +98,20 @@ public class User implements Serializable {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        return username.equals(user.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return username.hashCode();
     }
 }

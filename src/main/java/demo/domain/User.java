@@ -33,7 +33,7 @@ public class User implements Serializable {
     @Column(nullable = false)
     private boolean enabled = true;
 
-    protected User() {
+    public User() {
     }
 
     public User(String username) {

@@ -13,8 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.ModelAndViewAssert.assertModelAttributeValue;
-import static org.springframework.test.web.ModelAndViewAssert.assertViewName;
+import static org.springframework.test.web.ModelAndViewAssert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
@@ -45,5 +44,12 @@ public class UserControllerTest {
         verify(userService).findByUsername(username);
         assertViewName(mav, "home");
         assertModelAttributeValue(mav, "user", user);
+    }
+
+    @Test
+    public void showSignup() {
+        ModelAndView mav = userController.signup();
+        assertViewName(mav, "signup");
+        assertModelAttributeAvailable(mav, "user");
     }
 }

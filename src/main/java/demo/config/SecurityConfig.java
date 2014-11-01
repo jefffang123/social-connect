@@ -30,7 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // @formatter:off
         http.authorizeRequests()
+                .antMatchers("/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -43,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .rememberMe()
                 .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(7 * 24 * 60 * 60); // One Week
+        // @formatter:on
     }
 
     @Bean

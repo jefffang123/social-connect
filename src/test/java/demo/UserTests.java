@@ -5,12 +5,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import javax.servlet.Filter;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -18,24 +19,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class UserIntegrationTests {
+public class UserTests {
 
     @Autowired
-    private FilterChainProxy springSecurityFilterChain;
+    private WebApplicationContext context;
 
     @Autowired
-    private WebApplicationContext wac;
+    private Filter springSecurityFilterChain;
 
-    private MockMvc mockMvc;
+    private MockMvc mvc;
 
     @Before
     public void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac).addFilters(springSecurityFilterChain).build();
+        mvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .addFilters(springSecurityFilterChain)
+                .build();
     }
 
     @Test
     public void homeNotLoggedIn() throws Exception {
-        mockMvc.perform(get("/"))
+        mvc.perform(get("/"))
                 .andExpect(redirectedUrl("http://localhost/signin"));
     }
 }

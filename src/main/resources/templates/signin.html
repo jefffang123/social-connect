@@ -20,11 +20,11 @@
                 </header>
 
                 <div class="alert alert-danger" role="alert" th:if="${param.error}">
-                    Wrong username or password
+                    Invalid username and password.
                 </div>
 
                 <div class="alert alert-success" role="alert" th:if="${param.logout}">
-                    Signed out successfully
+                    You have been logged out.
                 </div>
 
                 <form method="post" class="form-horizontal" role="form" th:action="@{/signin}">

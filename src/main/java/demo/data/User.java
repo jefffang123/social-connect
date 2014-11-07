@@ -1,4 +1,4 @@
-package demo.domain;
+package demo.data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +33,7 @@ public class User implements Serializable {
     @Column(nullable = false)
     private boolean enabled = true;
 
-    public User() {
+    protected User() {
     }
 
     public User(String username) {

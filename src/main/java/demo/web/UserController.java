@@ -1,7 +1,7 @@
 package demo.web;
 
-import demo.domain.User;
-import demo.service.UserService;
+import demo.data.User;
+import demo.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +14,12 @@ import java.security.Principal;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
     @RequestMapping("/")
     public ModelAndView home(Principal principal) {
         String username = principal.getName();
-        User user = userService.findByUsername(username);
+        User user = userRepository.findByUsername(username);
 
         return new ModelAndView("home", "user", user);
     }

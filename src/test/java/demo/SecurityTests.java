@@ -1,7 +1,6 @@
 package demo;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +9,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.Filter;
 
 import static demo.SecurityRequestPostProcessors.csrf;
-import static demo.SecurityRequestPostProcessors.userDetailsService;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -27,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class UserTests {
+public class SecurityTests {
 
     @Autowired
     private WebApplicationContext context;
@@ -91,16 +87,5 @@ public class UserTests {
 
         mvc.perform(request)
                 .andExpect(redirectedUrl("/"));
-    }
-
-    @Ignore
-    @Test
-    public void homepage() throws Exception {
-        performWithTestUser(get("/"))
-                .andExpect(status().isOk());
-    }
-
-    private ResultActions performWithTestUser(MockHttpServletRequestBuilder request) throws Exception {
-        return mvc.perform(request.with(userDetailsService("jeff")));
     }
 }

@@ -9,12 +9,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.Filter;
 
 import static demo.SecurityRequestPostProcessors.csrf;
+import static demo.SecurityRequestPostProcessors.userDetailsService;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -87,5 +90,15 @@ public class UserTests {
 
         mvc.perform(request)
                 .andExpect(redirectedUrl("/"));
+    }
+
+    @Test
+    public void homepage() throws Exception {
+        performWithTestUser(get("/"))
+                .andExpect(status().isOk());
+    }
+
+    private ResultActions performWithTestUser(MockHttpServletRequestBuilder request) throws Exception {
+        return mvc.perform(request.with(userDetailsService("jeff")));
     }
 }

@@ -72,7 +72,7 @@ public final class SecurityRequestPostProcessors {
      * additional details are obtained from the {@link org.springframework.security.core.userdetails.UserDetailsService}
      * declared in the {@link org.springframework.web.context.WebApplicationContext}.
      */
-    public static UserDetailsRequestPostProcessor userDeatilsService(String username) {
+    public static UserDetailsRequestPostProcessor userDetailsService(String username) {
         return new UserDetailsRequestPostProcessor(username);
     }
 

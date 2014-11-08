@@ -1,6 +1,7 @@
 package demo;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +93,7 @@ public class UserTests {
                 .andExpect(redirectedUrl("/"));
     }
 
+    @Ignore
     @Test
     public void homepage() throws Exception {
         performWithTestUser(get("/"))

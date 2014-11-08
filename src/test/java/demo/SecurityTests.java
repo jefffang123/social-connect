@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -44,10 +45,7 @@ public class SecurityTests {
     @Test
     public void homeRequiresLogin() throws Exception {
         mvc.perform(get("/"))
-                .andExpect(result -> {
-                    status().isMovedTemporarily().match(result);
-                    redirectedUrl("http://localhost/signin").match(result);
-                });
+                .andExpect(redirectedUrl("http://localhost/signin"));
     }
 
     @Test
@@ -58,10 +56,7 @@ public class SecurityTests {
                 .with(csrf());
 
         mvc.perform(request)
-                .andExpect(result -> {
-                    status().isMovedTemporarily().match(result);
-                    redirectedUrl("/signin?error").match(result);
-                });
+                .andExpect(redirectedUrl("/signin?error"));
     }
 
     @Test
@@ -72,20 +67,46 @@ public class SecurityTests {
                 .with(csrf());
 
         mvc.perform(request)
-                .andExpect(result -> {
-                    status().isMovedTemporarily().match(result);
-                    redirectedUrl("/signin?error").match(result);
-                });
+                .andExpect(redirectedUrl("/signin?error"));
+    }
+
+    @Test
+    public void loginRequiresCsrf() throws Exception {
+        RequestBuilder request = post("/signin")
+                .param("username", "jeff")
+                .param("password", "test1234");
+
+        mvc.perform(request)
+                .andExpect(status().isForbidden());
     }
 
     @Test
     public void loginWithValidUsernamePassword() throws Exception {
+        login().andExpect(redirectedUrl("/"));
+    }
+
+    @Test
+    public void logoutRequiresCsrf() throws Exception {
+        login();
+
+        mvc.perform(post("/logout"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    public void logoutWithCsrf() throws Exception {
+        login();
+
+        mvc.perform(post("/logout").with(csrf()))
+                .andExpect(redirectedUrl("/signin?logout"));
+    }
+
+    private ResultActions login() throws Exception {
         RequestBuilder request = post("/signin")
                 .param("username", "jeff")
                 .param("password", "test1234")
                 .with(csrf());
 
-        mvc.perform(request)
-                .andExpect(redirectedUrl("/"));
+        return mvc.perform(request);
     }
 }

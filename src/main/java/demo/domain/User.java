@@ -1,4 +1,4 @@
-package demo.data;
+package demo.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,7 +1,7 @@
 package demo.web;
 
-import demo.data.User;
-import demo.data.UserRepository;
+import demo.domain.User;
+import demo.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

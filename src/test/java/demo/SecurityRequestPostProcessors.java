@@ -102,7 +102,9 @@ public final class SecurityRequestPostProcessors {
         }
     }
 
-    /** Support class for {@link org.springframework.test.web.servlet.request.RequestPostProcessor}'s that establish a Spring Security context */
+    /**
+     * Support class for {@link org.springframework.test.web.servlet.request.RequestPostProcessor}'s that establish a Spring Security context
+     */
     private static abstract class SecurityContextRequestPostProcessorSupport {
 
         private SecurityContextRepository repository = new HttpSessionSecurityContextRepository();
@@ -136,7 +138,7 @@ public final class SecurityRequestPostProcessors {
         }
 
         public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
-            save(this.securityContext,request);
+            save(this.securityContext, request);
             return request;
         }
     }
@@ -171,15 +173,15 @@ public final class SecurityRequestPostProcessors {
          * {@link #authorities(org.springframework.security.core.GrantedAuthority...)}, but just not as flexible.
          *
          * @param roles The roles to populate. Note that if the role does not start with
-         * {@link #rolePrefix(String)} it will automatically be prepended. This means by
-         * default {@code roles("ROLE_USER")} and {@code roles("USER")} are equivalent.
+         *              {@link #rolePrefix(String)} it will automatically be prepended. This means by
+         *              default {@code roles("ROLE_USER")} and {@code roles("USER")} are equivalent.
          * @see #authorities(org.springframework.security.core.GrantedAuthority...)
          * @see #rolePrefix(String)
          */
         public UserRequestPostProcessor roles(String... roles) {
             List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(roles.length);
-            for(String role : roles) {
-                if(this.rolePrefix == null || role.startsWith(this.rolePrefix)) {
+            for (String role : roles) {
+                if (this.rolePrefix == null || role.startsWith(this.rolePrefix)) {
                     authorities.add(new SimpleGrantedAuthority(role));
                 } else {
                     authorities.add(new SimpleGrantedAuthority(this.rolePrefix + role));
@@ -190,6 +192,7 @@ public final class SecurityRequestPostProcessors {
 
         /**
          * Populates the user's {@link org.springframework.security.core.GrantedAuthority}'s.
+         *
          * @param authorities
          * @see #roles(String...)
          */
@@ -201,7 +204,7 @@ public final class SecurityRequestPostProcessors {
         public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(this.principal, this.credentials, this.authorities);
-            save(authentication,request);
+            save(authentication, request);
             return request;
         }
     }
@@ -220,7 +223,7 @@ public final class SecurityRequestPostProcessors {
         /**
          * Use this method to specify the bean id of the {@link org.springframework.security.core.userdetails.UserDetailsService} to
          * use to look up the {@link org.springframework.security.core.userdetails.UserDetails}.
-         *
+         * <p>
          * <p>By default a lookup of {@link org.springframework.security.core.userdetails.UserDetailsService} is performed by type. This
          * can be problematic if multiple {@link org.springframework.security.core.userdetails.UserDetailsService} beans are declared.
          */
@@ -231,7 +234,7 @@ public final class SecurityRequestPostProcessors {
 
         public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
             UsernamePasswordAuthenticationToken authentication = authentication(request.getServletContext());
-            save(authentication,request);
+            save(authentication, request);
             return request;
         }
 
@@ -244,13 +247,14 @@ public final class SecurityRequestPostProcessors {
         }
 
         private UserDetailsService userDetailsService(ApplicationContext context) {
-            if(this.userDetailsServiceBeanId == null) {
+            if (this.userDetailsServiceBeanId == null) {
                 return context.getBean(UserDetailsService.class);
             }
             return context.getBean(this.userDetailsServiceBeanId, UserDetailsService.class);
         }
     }
 
-    private SecurityRequestPostProcessors() {}
+    private SecurityRequestPostProcessors() {
+    }
 
 }

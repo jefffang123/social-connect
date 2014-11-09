@@ -1,4 +1,4 @@
-package demo.data;
+package demo.domain;
 
 import org.springframework.data.repository.CrudRepository;
 

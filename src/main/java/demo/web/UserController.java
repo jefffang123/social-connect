@@ -3,12 +3,11 @@ package demo.web;
 import demo.domain.User;
 import demo.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.security.Principal;
 
 @Controller
 public class UserController {
@@ -17,10 +16,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @RequestMapping("/")
-    public ModelAndView home(Principal principal) {
-        String username = principal.getName();
-        User user = userRepository.findByUsername(username);
-
+    public ModelAndView home(@AuthenticationPrincipal User user) {
         return new ModelAndView("home", "user", user);
     }
 

@@ -18,8 +18,7 @@ import javax.servlet.Filter;
 import static demo.SecurityRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
@@ -40,6 +39,11 @@ public class SecurityTests {
                 .webAppContextSetup(context)
                 .addFilters(springSecurityFilterChain)
                 .build();
+
+        // This is a workaround for an issue related to thymeleaf security dialect throwing error when accessing application context.
+        // Refer to: http://stackoverflow.com/questions/24999469/how-to-unit-test-a-secured-controller-which-uses-thymeleaf-without-getting-temp
+        context.getServletContext().setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, context);
+        // End of workaround
     }
 
     @Test
@@ -80,6 +84,15 @@ public class SecurityTests {
                 .andExpect(status().isForbidden());
     }
 
+    private ResultActions login() throws Exception {
+        RequestBuilder request = post("/signin")
+                .param("username", "jeff")
+                .param("password", "test1234")
+                .with(csrf());
+
+        return mvc.perform(request);
+    }
+
     @Test
     public void loginWithValidUsernamePassword() throws Exception {
         login().andExpect(redirectedUrl("/"));
@@ -101,12 +114,21 @@ public class SecurityTests {
                 .andExpect(redirectedUrl("/signin?logout"));
     }
 
-    private ResultActions login() throws Exception {
-        RequestBuilder request = post("/signin")
-                .param("username", "jeff")
-                .param("password", "test1234")
-                .with(csrf());
+    @Test
+    public void signupPage() throws Exception {
+        mvc.perform(get("/signup"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("signup"))
+                .andExpect(model().attributeExists("user"));
+    }
 
-        return mvc.perform(request);
+    @Test
+    public void signupWithInvalidData() throws Exception {
+
+    }
+
+    @Test
+    public void signupWithValidData() throws Exception {
+
     }
 }

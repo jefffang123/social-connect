@@ -9,7 +9,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -84,32 +83,24 @@ public class SecurityTests {
                 .andExpect(status().isForbidden());
     }
 
-    private ResultActions login() throws Exception {
+    @Test
+    public void loginWithValidUsernamePassword() throws Exception {
         RequestBuilder request = post("/signin")
                 .param("username", "jeff")
                 .param("password", "test1234")
                 .with(csrf());
 
-        return mvc.perform(request);
-    }
-
-    @Test
-    public void loginWithValidUsernamePassword() throws Exception {
-        login().andExpect(redirectedUrl("/"));
+        mvc.perform(request).andExpect(redirectedUrl("/"));
     }
 
     @Test
     public void logoutRequiresCsrf() throws Exception {
-        login();
-
         mvc.perform(post("/logout"))
                 .andExpect(status().isForbidden());
     }
 
     @Test
     public void logoutWithCsrf() throws Exception {
-        login();
-
         mvc.perform(post("/logout").with(csrf()))
                 .andExpect(redirectedUrl("/signin?logout"));
     }

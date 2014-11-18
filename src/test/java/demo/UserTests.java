@@ -15,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.servlet.Filter;
 
 import static demo.SecurityRequestPostProcessors.csrf;
+import static demo.SecurityRequestPostProcessors.userDetailsService;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class SecurityTests {
+public class UserTests {
 
     @Autowired
     private WebApplicationContext context;
@@ -121,5 +122,13 @@ public class SecurityTests {
     @Test
     public void signupWithValidData() throws Exception {
 
+    }
+
+    @Test
+    public void showUserProfileInHomepage() throws Exception {
+        mvc.perform(get("/").with(userDetailsService("jeff")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("home"))
+                .andExpect(model().attributeExists("user"));
     }
 }

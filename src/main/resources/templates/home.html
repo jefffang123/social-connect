@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
-    <table class="table table-striped" th:object="${#authentication.principal}">
+    <table class="table table-striped" th:object="${user}">
         <caption>
             <h2>My Profile</h2>
         </caption>

@@ -1,5 +1,6 @@
 package demo;
 
+import demo.domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -129,6 +130,6 @@ public class UserTests {
         mvc.perform(get("/").with(userDetailsService("jeff")))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
-                .andExpect(model().attributeExists("user"));
+                .andExpect(model().attribute("user", new User("jeff")));
     }
 }

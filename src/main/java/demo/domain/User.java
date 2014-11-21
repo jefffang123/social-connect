@@ -33,8 +33,8 @@ public class User implements Serializable {
     @Column(nullable = false)
     private boolean enabled = true;
 
-    protected User() {
-        // JPA spec
+    public User() {
+        this("");
     }
 
     public User(String username) {

@@ -19,18 +19,18 @@
                     <h2>Sign up</h2>
                 </header>
 
-                <form class="form-horizontal" role="form">
+                <form action="#" class="form-horizontal" role="form" method="post" th:action="@{/signup}" th:object="${user}">
                     <div class="form-group">
                         <label for="username" class="col-sm-4 control-label">Username</label>
                         <div class="col-sm-8">
-                            <input id="username" name="username" type="text" class="form-control" placeholder="Username" required="" autofocus=""/>
+                            <input id="username" name="username" type="text" class="form-control" placeholder="Username" required="" autofocus="" th:field="*{username}"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="password" class="col-sm-4 control-label">Password</label>
                         <div class="col-sm-8">
-                            <input id="password" name="password" type="password" class="form-control" placeholder="Password" required=""/>
+                            <input id="password" name="password" type="password" class="form-control" placeholder="Password" required="" th:field="*{password}"/>
                         </div>
                     </div>
 
@@ -44,28 +44,28 @@
                     <div class="form-group">
                         <label for="firstName" class="col-sm-4 control-label">First name</label>
                         <div class="col-sm-8">
-                            <input id="firstName" name="firstName" type="text" class="form-control" placeholder="First name" required=""/>
+                            <input id="firstName" name="firstName" type="text" class="form-control" placeholder="First name" required="" th:field="*{firstName}"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="middleName" class="col-sm-4 control-label">Middle name</label>
                         <div class="col-sm-8">
-                            <input id="middleName" name="middleName" type="text" class="form-control" placeholder="Middle name"/>
+                            <input id="middleName" name="middleName" type="text" class="form-control" placeholder="Middle name" th:field="*{middleName}"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="lastName" class="col-sm-4 control-label">Last name</label>
                         <div class="col-sm-8">
-                            <input id="lastName" name="lastName" type="text" class="form-control" placeholder="Last name" required=""/>
+                            <input id="lastName" name="lastName" type="text" class="form-control" placeholder="Last name" required="" th:field="*{lastName}"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="email" class="col-sm-4 control-label">Email</label>
                         <div class="col-sm-8">
-                            <input id="email" name="email" type="email" class="form-control" placeholder="Email" required=""/>
+                            <input id="email" name="email" type="email" class="form-control" placeholder="Email" required="" th:field="*{email}"/>
                         </div>
                     </div>
 

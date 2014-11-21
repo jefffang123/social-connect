@@ -112,12 +112,15 @@ public class UserTests {
         mvc.perform(get("/signup"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("signup"))
-                .andExpect(model().attributeExists("user"));
+                .andExpect(model().attribute("user", new User()));
     }
 
     @Test
     public void signupWithInvalidData() throws Exception {
-
+        mvc.perform(post("/signup").with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(view().name("signup"))
+                .andExpect(model().hasErrors());
     }
 
     @Test

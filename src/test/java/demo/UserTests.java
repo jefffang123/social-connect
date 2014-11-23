@@ -117,10 +117,11 @@ public class UserTests {
 
     @Test
     public void signupWithInvalidData() throws Exception {
-        signupFail("username", "");
+        signupShouldFail("username", "");
+        signupShouldFail("username", "  ");
     }
 
-    private void signupFail(String fieldName, String invalidValue) throws Exception {
+    private void signupShouldFail(String fieldName, String invalidValue) throws Exception {
         RequestBuilder request = post("/signup")
                 .param(fieldName, invalidValue)
                 .with(csrf());

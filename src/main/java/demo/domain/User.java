@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -13,7 +14,7 @@ public class User implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Size(min = 2, max = 30)
     private String username;
 
     @Column(nullable = false)

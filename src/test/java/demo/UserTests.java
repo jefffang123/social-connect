@@ -117,10 +117,18 @@ public class UserTests {
 
     @Test
     public void signupWithInvalidData() throws Exception {
-        mvc.perform(post("/signup").with(csrf()))
+        signupFail("username", "");
+    }
+
+    private void signupFail(String fieldName, String invalidValue) throws Exception {
+        RequestBuilder request = post("/signup")
+                .param(fieldName, invalidValue)
+                .with(csrf());
+
+        mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(view().name("signup"))
-                .andExpect(model().hasErrors());
+                .andExpect(model().attributeHasFieldErrors("user", fieldName));
     }
 
     @Test

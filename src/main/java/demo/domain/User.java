@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -14,6 +15,7 @@ public class User implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     @Size(min = 2, max = 30)
     private String username;
 
@@ -35,7 +37,7 @@ public class User implements Serializable {
     private boolean enabled = true;
 
     public User() {
-        this("");
+        // JPA spec requires default constructor
     }
 
     public User(String username) {
@@ -120,11 +122,13 @@ public class User implements Serializable {
 
         User user = (User) o;
 
-        return username.equals(user.username);
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return username.hashCode();
+        return username != null ? username.hashCode() : 0;
     }
 }

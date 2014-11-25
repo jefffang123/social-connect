@@ -119,6 +119,8 @@ public class UserTests {
     public void signupWithInvalidData() throws Exception {
         signupShouldFail("username", "");
         signupShouldFail("username", "  ");
+        signupShouldFail("password", "");
+        signupShouldFail("password", " test1");
     }
 
     private void signupShouldFail(String fieldName, String invalidValue) throws Exception {

@@ -118,9 +118,17 @@ public class UserTests {
     @Test
     public void signupWithInvalidData() throws Exception {
         signupShouldFail("username", "");
-        signupShouldFail("username", "  ");
+        signupShouldFail("username", " a");
+        signupShouldFail("username", "test1234_%");
+
         signupShouldFail("password", "");
         signupShouldFail("password", " test1");
+
+        signupShouldFail("firstName", " ");
+        signupShouldFail("lastName", " ");
+
+        signupShouldFail("email", "");
+        signupShouldFail("email", "test");
     }
 
     private void signupShouldFail(String fieldName, String invalidValue) throws Exception {

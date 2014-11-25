@@ -1,10 +1,14 @@
 package demo.domain;
 
-import javax.persistence.Column;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -16,25 +20,28 @@ public class User implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(min = 2, max = 30)
+    @Pattern(regexp = "\\w{2,}")
     private String username;
 
     @NotNull
-    @Size(min = 6, max = 30)
+    @Size(min = 6)
     private String password;
 
-    @Column(nullable = false)
+    @Transient
+    private String confirmPassword;
+
+    @NotBlank
     private String firstName;
 
     private String middleName;
 
-    @Column(nullable = false)
+    @NotBlank
     private String lastName;
 
-    @Column(nullable = false)
+    @NotNull
+    @Email
     private String email;
 
-    @Column(nullable = false)
     private boolean enabled = true;
 
     public User() {
@@ -49,6 +56,7 @@ public class User implements Serializable {
         this.id = user.id;
         this.username = user.username;
         this.password = user.password;
+        this.confirmPassword = user.confirmPassword;
         this.firstName = user.firstName;
         this.middleName = user.middleName;
         this.lastName = user.lastName;
@@ -74,6 +82,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getFirstName() {

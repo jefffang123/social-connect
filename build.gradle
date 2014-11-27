@@ -45,6 +45,9 @@ dependencies {
 
     // Test
     testCompile("org.springframework.boot:spring-boot-starter-test")
+
+    // Other
+    compile("cz.jirutka.validator:validator-spring:1.0.1")
 }
 
 eclipse {

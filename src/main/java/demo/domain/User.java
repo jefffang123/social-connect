@@ -1,5 +1,6 @@
 package demo.domain;
 
+import cz.jirutka.validator.spring.SpELAssert;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -13,6 +14,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
+@SpELAssert("password == confirmPassword")
 public class User implements Serializable {
 
     @Id
@@ -28,6 +30,8 @@ public class User implements Serializable {
     private String password;
 
     @Transient
+    @NotNull
+    @Size(min = 6)
     private String confirmPassword;
 
     @NotBlank

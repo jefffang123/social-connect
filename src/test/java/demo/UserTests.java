@@ -124,6 +124,8 @@ public class UserTests {
         signupShouldFail("password", "");
         signupShouldFail("password", " test1");
 
+        signupShouldFail("confirmPassword", "");
+
         signupShouldFail("firstName", " ");
         signupShouldFail("lastName", " ");
 
@@ -140,6 +142,23 @@ public class UserTests {
                 .andExpect(status().isOk())
                 .andExpect(view().name("signup"))
                 .andExpect(model().attributeHasFieldErrors("user", fieldName));
+    }
+
+    @Test
+    public void shouldRejectSignupIfConfirmPasswordNotMatch() throws Exception {
+        RequestBuilder request = post("/signup")
+                .param("username", "jeff1")
+                .param("password", "test1234")
+                .param("confirmPassword", "test12345")
+                .param("firstName", "Jeff")
+                .param("lastName", "Fang")
+                .param("email", "sanlyfang@gmail.com")
+                .with(csrf());
+
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(view().name("signup"))
+                .andExpect(model().attributeHasErrors("user"));
     }
 
     @Test

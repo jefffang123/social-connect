@@ -19,53 +19,60 @@
                     <h2>Sign up</h2>
                 </header>
 
-                <form action="#" class="form-horizontal" role="form" method="post" th:action="@{/signup}" th:object="${user}">
-                    <div class="form-group">
+                <form action="#" class="form-horizontal" role="form" method="post" novalidate="" th:action="@{/signup}" th:object="${user}">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('username')} ? 'has-error'">
                         <label for="username" class="col-sm-4 control-label">Username</label>
                         <div class="col-sm-8">
                             <input id="username" name="username" type="text" class="form-control" placeholder="Username" required="" autofocus="" th:field="*{username}"/>
+                            <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
                         <label for="password" class="col-sm-4 control-label">Password</label>
                         <div class="col-sm-8">
                             <input id="password" name="password" type="password" class="form-control" placeholder="Password" required="" th:field="*{password}"/>
+                            <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')} ? 'has-error'">
                         <label for="confirmPassword" class="col-sm-4 control-label">Confirm Password</label>
                         <div class="col-sm-8">
                             <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" placeholder="Confirm Password" required="" th:field="*{confirmPassword}"/>
+                            <div class="text-danger" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('firstName')} ? 'has-error'">
                         <label for="firstName" class="col-sm-4 control-label">First name</label>
                         <div class="col-sm-8">
                             <input id="firstName" name="firstName" type="text" class="form-control" placeholder="First name" required="" th:field="*{firstName}"/>
+                            <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('middleName')} ? 'has-error'">
                         <label for="middleName" class="col-sm-4 control-label">Middle name</label>
                         <div class="col-sm-8">
                             <input id="middleName" name="middleName" type="text" class="form-control" placeholder="Middle name" th:field="*{middleName}"/>
+                            <div class="text-danger" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"></div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('lastName')} ? 'has-error'">
                         <label for="lastName" class="col-sm-4 control-label">Last name</label>
                         <div class="col-sm-8">
                             <input id="lastName" name="lastName" type="text" class="form-control" placeholder="Last name" required="" th:field="*{lastName}"/>
+                            <div class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-error'">
                         <label for="email" class="col-sm-4 control-label">Email</label>
                         <div class="col-sm-8">
                             <input id="email" name="email" type="email" class="form-control" placeholder="Email" required="" th:field="*{email}"/>
+                            <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                         </div>
                     </div>
 
